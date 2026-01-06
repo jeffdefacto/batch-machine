@@ -64,34 +64,9 @@ ADDRESSES_SCHEMA = [
     "id",
     "accuracy",
 ]
-NAD_SCHEMA = [
-    "hash",
-    "AddNo_Full",
-    "AddNum_Pre",
-    "Add_Number",
-    "AddNum_Suf",
-    "StNam_Full",
-    "St_PreMod",
-    "St_PreDir",
-    "St_PreTyp",
-    "St_PreSep",
-    "St_Name",
-    "St_PosTyp",
-    "St_PosDir",
-    "St_PosMod",
-    "unit",
-    "city",
-    "district",
-    "region",
-    "postcode",
-    "id",
-    "accuracy",
-]
-BUILDINGS_SCHEMA = ["hash"]
+BUILDINGS_SCHEMA = ["hash", "height", "levels"]
 PARCELS_SCHEMA = ["hash", "pid"]
-RESERVED_SCHEMA = (
-    ADDRESSES_SCHEMA + NAD_SCHEMA + BUILDINGS_SCHEMA + PARCELS_SCHEMA + ["lat", "lon"]
-)
+RESERVED_SCHEMA = ADDRESSES_SCHEMA + BUILDINGS_SCHEMA + PARCELS_SCHEMA + ["lat", "lon"]
 
 UNZIPPED_DIRNAME = "unzipped"
 UNGZIPPED_DIRNAME = "ungzipped"
@@ -967,10 +942,6 @@ def row_transform_and_convert(source_config, row):
 
 def row_merge(sc, row, key):
     "Merge multiple columns like 'Maple','St' to 'Maple St'"
-    merge_data = [
-        (row.get(field, "") or "").strip() for field in sc.data_source["conform"][key]
-    ]
-    row["oa:{}".format(key)] = " ".join([part for part in merge_data if part])
     merge_data = [
         (row.get(field, "") or "").strip() for field in sc.data_source["conform"][key]
     ]
