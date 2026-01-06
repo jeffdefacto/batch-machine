@@ -64,9 +64,34 @@ ADDRESSES_SCHEMA = [
     "id",
     "accuracy",
 ]
-BUILDINGS_SCHEMA = ["hash", "height", "levels"]
+NAD_SCHEMA = [
+    "hash",
+    "AddNo_Full",
+    "AddNum_Pre",
+    "Add_Number",
+    "AddNum_Suf",
+    "StNam_Full",
+    "St_PreMod",
+    "St_PreDir",
+    "St_PreTyp",
+    "St_PreSep",
+    "St_Name",
+    "St_PosTyp",
+    "St_PosDir",
+    "St_PosMod",
+    "unit",
+    "city",
+    "district",
+    "region",
+    "postcode",
+    "id",
+    "accuracy",
+]
+BUILDINGS_SCHEMA = ["hash"]
 PARCELS_SCHEMA = ["hash", "pid"]
-RESERVED_SCHEMA = ADDRESSES_SCHEMA + BUILDINGS_SCHEMA + PARCELS_SCHEMA + ["lat", "lon"]
+RESERVED_SCHEMA = (
+    ADDRESSES_SCHEMA + NAD_SCHEMA + BUILDINGS_SCHEMA + PARCELS_SCHEMA + ["lat", "lon"]
+)
 
 UNZIPPED_DIRNAME = "unzipped"
 UNGZIPPED_DIRNAME = "ungzipped"
